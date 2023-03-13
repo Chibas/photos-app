@@ -95,7 +95,7 @@ const Sidebar = ({ image, favorited } : { image: Image, favorited: boolean }): J
         <ImageTileDescription>
           <div className="top">
             <h3>{image.filename}</h3>
-            <img src={imageLink} alt="favorite" onClick={favoriteHandler}/> 
+            <img src={process.env.PUBLIC_URL + imageLink} alt="favorite" onClick={favoriteHandler}/> 
           </div>
           <div className="bottom">
             <p>{(image.sizeInBytes/1024/1024).toFixed(2) + ' MB'}</p>
