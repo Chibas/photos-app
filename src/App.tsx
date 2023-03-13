@@ -1,57 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import { useEffect } from 'react';
+import Container from './ui/Container';
+import Tabs from './components/Tabs';
+import ImageList from './components/Images/ImageList';
+import Sidebar from './components/Sidebar';
+import { useAppSelector, useAppDispatch } from './store/hooks';
+import {
+  getImages,
+  selectAllImages,
+  selectSelectedImage
+} from './store/slices/images';
+
 
 function App() {
+  const imagesList = useAppSelector(selectAllImages);
+  const status = useAppSelector((state) => state.images.status);
+  const selectedImage = useAppSelector(selectSelectedImage);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getImages())
+  }, [dispatch]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
+    <Container>
+      <header>
+        <h1>Photos</h1>
+        <nav>
+          <Tabs />
+        </nav>
       </header>
-    </div>
+      <main>
+        {status !== 'loading' && <ImageList images={imagesList} selectedImageId={selectedImage?.id}/>}
+      </main>
+      <aside>
+        {selectedImage && <Sidebar image={selectedImage} favorited={selectedImage.favorited}/>}
+      </aside>
+    </Container>
   );
 }
 
