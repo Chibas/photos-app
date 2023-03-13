@@ -7,7 +7,6 @@ import {
 } from '../../store/slices/images';
 import { useAppDispatch } from '../../store/hooks';
 
-
 const ImageDescription = styled.div`
   p {
     overflow: hidden;
@@ -17,9 +16,11 @@ const ImageDescription = styled.div`
   p:last-child {
     color: ${props => props.theme.secondary}
   }
-`
+`;
 
-const ImageTileComponent = ({ image, selected }: { image: Image, selected?: boolean }): JSX.Element => {
+type ImageTileComponentProps = { image: Image, selected?: boolean };
+
+const ImageTileComponent = ({ image, selected }: ImageTileComponentProps): JSX.Element => {
   const dispatch = useAppDispatch();
   const selectImageDispatch = useCallback(() => {
     dispatch(selectImage(image.id))

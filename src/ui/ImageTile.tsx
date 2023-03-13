@@ -43,9 +43,17 @@ const ImageWrapper = styled.div.attrs((props: {height: string}) => props)`
   }
 `;
 
+type ImageTileProps = {
+  image: Image,
+  selectable?: boolean,
+  selected?: boolean,
+  height: string,
+  width: string,
+  clickHandler?: MouseEventHandler,
+  children?: React.ReactNode }
+
 const ImageTile = (
-  { image, selectable = false, selected = false, height, width, clickHandler, children }:
-  { image: Image, selectable?: boolean, selected?: boolean, height: string, width: string, clickHandler?: MouseEventHandler, children?: React.ReactNode }): JSX.Element => {
+  { image, selectable = false, selected = false, height, width, clickHandler, children }: ImageTileProps): JSX.Element => {
   return (
     <ImageContainer width={width} onClick={clickHandler}>
       <ImageWrapper className={selectable && selected ? 'selected' : ''} height={height}>

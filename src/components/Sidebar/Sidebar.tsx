@@ -79,7 +79,9 @@ const ImageDescriptionRow = styled.div`
 const options = { year: 'numeric', month: 'long', day: 'numeric' } as const;
 const datePipe = (dateString: string): string => new Date(dateString).toLocaleDateString('en-US', options)
 
-const Sidebar = ({ image, favorited } : { image: Image, favorited: boolean }): JSX.Element => {
+type SidebarProps = { image: Image, favorited: boolean };
+
+const Sidebar = ({ image, favorited } : SidebarProps): JSX.Element => {
   const dispatch = useAppDispatch();
   const deleteHandler = useCallback(() => {
     dispatch(deleteImage(image.id));

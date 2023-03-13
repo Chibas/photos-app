@@ -16,7 +16,12 @@ const ImagesListContainer = styled.div`
   }
 `;
 
-const ImageList = ({ images, selectedImageId } : { images: Image[], selectedImageId?: string }): JSX.Element => {
+type ImageListProps = {
+  images: Image[],
+  selectedImageId?: string
+};
+
+const ImageList = ({ images, selectedImageId } : ImageListProps): JSX.Element => {
   return (
     <ImagesListContainer>
       {images.map(image => <ImageTile key={image.id} image={image} selected={image.id === selectedImageId}/> )}

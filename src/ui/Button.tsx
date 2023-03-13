@@ -17,7 +17,9 @@ const StyledButton = styled.button`
   }
 `;
 
-const Button = ({ title, clickHandler } : { title: string, clickHandler: MouseEventHandler }) => {
+type ButtonProps = { title: string, clickHandler: MouseEventHandler };
+
+const Button = ({ title, clickHandler } : ButtonProps) => {
   return (
     <StyledButton onClick={clickHandler}>{title}</StyledButton>
   )

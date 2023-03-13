@@ -34,7 +34,12 @@ export type TabOption = {
   clickHandler: MouseEventHandler;
 }
 
-const Tabs = ({ options, selectedOptionId } : { options: TabOption[], selectedOptionId: string | null }): JSX.Element => {
+type TabsProps = {
+  options: TabOption[],
+  selectedOptionId: string | null
+}
+
+const Tabs = ({ options, selectedOptionId } : TabsProps): JSX.Element => {
   return (
     <TabsWrapper>
       {
