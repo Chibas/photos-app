@@ -23,7 +23,6 @@ export const getImages = createAsyncThunk(
       const response = await getAllImages();
       return response.data;
     } catch (error) {
-      // You can choose to use the message attached to err or write a custom error
       return rejectWithValue(`Failed to fetch images with error: ${error}`);
     }
   }
